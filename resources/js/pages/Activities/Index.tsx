@@ -27,7 +27,10 @@ interface IndexProps {
 }
 
 export default function Index({ activities, scope = 'all' }: IndexProps) {
-    const { data, setData, post, reset, processing } = useForm({ name: '', description: '' });
+    const { data, setData, post, reset, processing } = useForm({
+        name: '',
+        description: '',
+    });
     const isToday = scope === 'today';
 
     const addActivity = (e: FormEvent) => {
@@ -51,9 +54,9 @@ export default function Index({ activities, scope = 'all' }: IndexProps) {
             <form onSubmit={addActivity} className="mb-6 flex gap-2">
                 <input
                     value={data.name}
-                    onChange={e => setData('name', e.target.value)}
+                    onChange={(e) => setData('name', e.target.value)}
                     placeholder="Add a new activity…"
-                    className="flex-1 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
+                    className="flex-1 rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
                 />
                 <button
                     type="submit"
@@ -70,7 +73,7 @@ export default function Index({ activities, scope = 'all' }: IndexProps) {
                         No activities yet — add one above to get started.
                     </p>
                 )}
-                {activities.map(activity => (
+                {activities.map((activity) => (
                     <ActivityRow key={activity.id} activity={activity} />
                 ))}
             </div>
@@ -79,17 +82,20 @@ export default function Index({ activities, scope = 'all' }: IndexProps) {
 }
 
 function ActivityRow({ activity }: { activity: Activity }) {
-    const { data, setData, post, reset, processing } = useForm({ status: 'pending', remark: '' });
+    const { data, setData, post, reset, processing } = useForm({
+        status: 'pending',
+        remark: '',
+    });
     const latest = activity.updates[0];
     const isDone = latest?.status === 'done';
 
     const submitUpdate = (e: FormEvent) => {
-    e.preventDefault();
-    post(`/activities/${activity.id}/updates`, {
-        onSuccess: () => reset(),
-        onError: (errors) => console.log('Update failed:', errors),
-    });
-};
+        e.preventDefault();
+        post(`/activities/${activity.id}/updates`, {
+            onSuccess: () => reset(),
+            onError: (errors) => console.log('Update failed:', errors),
+        });
+    };
 
     return (
         <div
@@ -126,20 +132,25 @@ function ActivityRow({ activity }: { activity: Activity }) {
                 )}
             </div>
 
-            <form onSubmit={submitUpdate} className="flex shrink-0 gap-2 sm:w-auto">
+            <form
+                onSubmit={submitUpdate}
+                className="flex shrink-0 gap-2 sm:w-auto"
+            >
                 <select
                     value={data.status}
-                    onChange={e => setData('status', e.target.value as 'pending' | 'done')}
-                    className="rounded-md border border-neutral-200 bg-white px-2 py-1.5 text-sm text-neutral-700 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
+                    onChange={(e) =>
+                        setData('status', e.target.value as 'pending' | 'done')
+                    }
+                    className="rounded-md border border-neutral-200 bg-white px-2 py-1.5 text-sm text-neutral-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
                 >
                     <option value="pending">Pending</option>
                     <option value="done">Done</option>
                 </select>
                 <input
                     value={data.remark}
-                    onChange={e => setData('remark', e.target.value)}
+                    onChange={(e) => setData('remark', e.target.value)}
                     placeholder="Remark"
-                    className="w-28 rounded-md border border-neutral-200 bg-white px-2 py-1.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:w-36 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
+                    className="w-28 rounded-md border border-neutral-200 bg-white px-2 py-1.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:w-36 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
                 />
                 <button
                     type="submit"

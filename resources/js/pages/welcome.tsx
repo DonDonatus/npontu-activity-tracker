@@ -1,8 +1,6 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { dashboard, login } from '@/routes';
-/* @chisel-registration */
 import { register } from '@/routes';
-/* @end-chisel-registration */
 
 export default function Welcome() {
     const { auth } = usePage().props;
@@ -28,14 +26,12 @@ export default function Welcome() {
                                 >
                                     Log in
                                 </Link>
-                                {/* @chisel-registration */}
                                 <Link
                                     href={register()}
                                     className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
                                 >
                                     Register
                                 </Link>
-                                {/* @end-chisel-registration */}
                             </>
                         )}
                     </nav>
@@ -49,7 +45,8 @@ export default function Welcome() {
                             <p className="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
                                 Daily activity tracking for support teams.
                                 <br />
-                                Log work, track status, and hand over cleanly between shifts.
+                                Log work, track status, and hand over cleanly
+                                between shifts.
                             </p>
                             <ul className="mb-4 flex flex-col lg:mb-6">
                                 <li className="relative flex items-center gap-4 py-2 before:absolute before:top-1/2 before:bottom-0 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]">
@@ -66,7 +63,10 @@ export default function Welcome() {
                                             <span className="h-1.5 w-1.5 rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A]" />
                                         </span>
                                     </span>
-                                    <span>Track status and hand over between shifts</span>
+                                    <span>
+                                        Track status and hand over between
+                                        shifts
+                                    </span>
                                 </li>
                                 <li className="relative flex items-center gap-4 py-2 before:absolute before:top-0 before:bottom-1/2 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]">
                                     <span className="relative bg-white py-1 dark:bg-[#161615]">
@@ -74,7 +74,10 @@ export default function Welcome() {
                                             <span className="h-1.5 w-1.5 rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A]" />
                                         </span>
                                     </span>
-                                    <span>Query activity history over any date range</span>
+                                    <span>
+                                        Query activity history over any date
+                                        range
+                                    </span>
                                 </li>
                             </ul>
                             <ul className="flex gap-3 text-sm leading-normal">

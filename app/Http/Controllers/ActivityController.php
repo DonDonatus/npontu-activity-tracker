@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\ActivityUpdate;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
 
 class ActivityController extends Controller
 {
@@ -18,10 +17,9 @@ class ActivityController extends Controller
             $q->where('activity_date', $today)->with('user')->latest();
         }])->get();
 
-
         return Inertia::render('Activities/Index', [
-        'activities' => $activities,
-        'scope' => 'today',
+            'activities' => $activities,
+            'scope' => 'today',
         ]);
     }
 
@@ -55,6 +53,7 @@ class ActivityController extends Controller
 
         return redirect()->back();
     }
+
     public function report(Request $request)
     {
         $from = $request->input('from', today()->subDays(7)->toDateString());
@@ -71,16 +70,16 @@ class ActivityController extends Controller
             'to' => $to,
         ]);
     }
+
     public function manage()
     {
-    $activities = Activity::with(['updates' => function ($q) {
-        $q->latest()->limit(1)->with('user');
-    }])->get();
+        $activities = Activity::with(['updates' => function ($q) {
+            $q->latest()->limit(1)->with('user');
+        }])->get();
 
-    return Inertia::render('Activities/Index', [
-        'activities' => $activities,
-        'scope' => 'all',
-    ]);
+        return Inertia::render('Activities/Index', [
+            'activities' => $activities,
+            'scope' => 'all',
+        ]);
     }
 }
-
